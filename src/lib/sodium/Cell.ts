@@ -368,7 +368,7 @@ export class Cell<A> {
 
     /**
      * Fantasy-land Algebraic Data Type Compatability.
-     * Cell satisfies the Monad and Comonad Categories (and hence Functor, Apply, Applicative, and Extend as well)
+     * Cell satisfies the Functor, Apply, Applicative categories
      * @see {@link https://github.com/fantasyland/fantasy-land} for more info
      */
 
@@ -385,20 +385,5 @@ export class Cell<A> {
     //ap :: Apply f => f a ~> f (a -> b) -> f b
     'fantasy-land/ap'<B>(cf: Cell<(a : A) => B>):Cell<B> {
         return Cell.apply(cf, this);
-    }
-
-    //chain :: Chain m => m a ~> (a -> m b) -> m b
-    'fantasy-land/chain'<B>(f: ((a:A) => Cell<B>)):Cell<B> {
-      return Cell.switchC(this.map(f));
-    }
-
-    //extend :: Extend w => w a ~> (w a -> b) -> w b
-    'fantasy-land/extend'<B>(f: ((a:Cell<A>) => B)):Cell<B> {
-      return new Cell<B>(f(this));
-    }
-
-    //extract :: Comonad w => w a ~> () -> a
-    'fantasy-land/extract'():A {
-      return this.sample();
     }
 }

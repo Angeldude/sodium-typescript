@@ -6,12 +6,12 @@ import { minify } from 'uglify-es';
 export default [
     {
         input: './src/lib/Lib.ts',
-        external: [ 'typescript-collections', 'sanctuary-type-classes' ],
+        external: [ 'typescript-collections', 'sanctuary-type-classes'],
         output: [
           { file: "dist/sodium.umd.min.js", name: "Sodium", format: 'umd', sourcemap: true,
             globals: {
-              'typescript-collections': 'Collections',
-              'sanctuary-type-classes': 'Z',
+                'typescript-collections': 'Collections',
+                'sanctuary-type-classes': 'Z'
             }
           },
         ],
